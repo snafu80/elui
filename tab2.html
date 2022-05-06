@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab组件</title>
+    <style>
+        .containner {
+            max-width: 800px;
+            border-radius: 4px;
+            box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.3);
+            margin: 50px auto;
+            padding: 10px;
+        }
+
+        .tab-header {
+            position: relative;
+            display: flex;
+            font-size: 13px;
+            color: #303030;
+            line-height: 30px;
+            font-weight: 500;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab-items {
+            margin-right: 30px;
+            cursor: pointer;
+        }
+
+        .tab-ligne {
+            position: absolute;
+            transform: translateX(0);
+            top: 100%;
+            height: 1px;
+            background: #409eff;
+            transition: all .2s;
+        }
+
+        .tab-items.active {
+            color: #409eff;
+        }
+
+        .content-panel {
+            padding: 16px 0;
+            font-size: 14px;
+            display: none;
+
+        }
+
+        .content-panel.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="containner">
+        <h2 class="header">tab选项卡1</h2>
+        <div class="tabs">
+            <div class="tab-header">
+                <span class="tab-items active">用户管理</span>
+                <span class="tab-items">配置管理</span>
+                <span class="tab-items">角色管理</span>
+                <span class="tab-items">定时任务补偿</span>
+                <span class="tab-ligne"></span>
+            </div>
+            <div class="tab-content">
+                <span class="content-panel active">用户管理</span>
+                <span class="content-panel">配置管理</span>
+                <span class="content-panel">角色管理</span>
+                <span class="content-panel">定时任务补偿</span>
+            </div>
+        </div>
+    </div>
+    <div class="containner">
+        <h2 class="header">tab选项卡2</h2>
+        <div class="tabs">
+            <div class="tab-header">
+                <span class="tab-items active">用户管理</span>
+                <span class="tab-items">配置管理</span>
+                <span class="tab-items">角色管理</span>
+                <span class="tab-items">定时任务补偿</span>
+                <span class="tab-ligne"></span>
+            </div>
+            <div class="tab-content">
+                <span class="content-panel active">用户管理</span>
+                <span class="content-panel">配置管理</span>
+                <span class="content-panel">角色管理</span>
+                <span class="content-panel">定时任务补偿</span>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+        class Tabs {
+            constructor($container) {
+                this.$container = $container
+                this.$$tabItems = $container.querySelectorAll('.tab-items')
+                this.$$tabPanels = $container.querySelectorAll('.content-panel')
+                this.$line = $container.querySelector('.tab-ligne')
+                this.init()
+                this.bind()
+
+            }
+
+            init() {
+                this.$line.style.width = this.$$tabItems[0].offsetWidth + 'px'
+            }
+            bind() {
+                let self = this
+                this.$$tabItems.forEach($tab => {
+                    $tab.onclick = function () {
+                        self.$$tabItems.forEach($tab => {
+                            $tab.classList.remove('active')
+                            this.classList.add('active')
+                            self.$line.style.width = this.offsetWidth + 'px'
+                            self.$line.style.transform = `translateX(${this.offsetLeft}px)`
+                            let index = [...self.$$tabItems].indexOf(this)
+                            self.$$tabPanels.forEach($panel => {
+                                $panel.classList.remove('active')
+                                self.$$tabPanels[index].classList.add('active')
+                            })
+                        })
+                    }
+                })
+            }
+        }
+
+
+
+        document.querySelectorAll('.tabs').forEach($container => new Tabs($container))
+
+    </script>
+</body>
+
+</html>
