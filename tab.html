@@ -16,6 +16,7 @@
         }
 
         .tab-header {
+            position: relative;
             display: flex;
             font-size: 13px;
             color: #303030;
@@ -27,6 +28,16 @@
         .tab-items {
             margin-right: 30px;
             cursor: pointer;
+        }
+
+        .tab-ligne{
+            position: absolute;
+            transform: translateX(0);
+            top:100%;
+            width: 50px;
+            height: 1px;
+            background: #409eff;
+            transition: all .2s;
         }
 
         .tab-items.active {
@@ -65,6 +76,26 @@
             </div>
         </div>
     </div>
+    <script>
+const $=s=>document.querySelector(s)
+const $$=s=>document.querySelectorAll(s)
+
+$$('.tabs .tab-items').forEach($tab =>{
+    $tab.onclick=function(){
+        $$('.tabs .tab-items').forEach($tab=>{
+            $tab.classList.remove('active')
+            this.classList.add('active')
+             $('.tabs .tab-ligne').style.width=this.offsetWidth+'px'
+             $('.tabs .tab-ligne').style.transform=`translateX(${this.offsetLeft}px)`
+            let index=[...$$('.tabs .tab-items')].indexOf(this)
+            $$('.tabs .content-panel').forEach($panel=>{$panel.classList.remove('active')
+            $$('.tabs .content-panel')[index].classList.add('active')
+        })
+        })
+    }
+})
+
+    </script>
 </body>
 
 </html>
