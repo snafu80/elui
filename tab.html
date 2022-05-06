@@ -34,7 +34,6 @@
             position: absolute;
             transform: translateX(0);
             top:100%;
-            width: 50px;
             height: 1px;
             background: #409eff;
             transition: all .2s;
@@ -79,7 +78,7 @@
     <script>
 const $=s=>document.querySelector(s)
 const $$=s=>document.querySelectorAll(s)
-
+$('.tabs .tab-ligne').style.width=$$('.tabs .tab-items')[0].offsetWidth+'px'
 $$('.tabs .tab-items').forEach($tab =>{
     $tab.onclick=function(){
         $$('.tabs .tab-items').forEach($tab=>{
