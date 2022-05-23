@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>carousel组件</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            border-radius: 4px;
+            box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.3);
+            padding: 16px;
+        }
+
+        .carousel {
+            position: relative;
+            height: 200px;
+        }
+
+        .carousel .panels>a {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+        }
+
+        .carousel .panels>a:nth-child(even) {
+            background-color: lightblue;
+        }
+
+        .carousel .panels>a:nth-child(odd) {
+            background-color: pink;
+        }
+
+        .carousel .arrow {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 50%;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(31, 45, 61, .11);
+            cursor: pointer;
+            opacity: 0;
+            transition: all .3s;
+        }
+
+        .carousel .arrow-pre {
+            left: 10px;
+            transform: translateX(-100%);
+
+        }
+
+        .carousel:hover .arrow-pre {
+
+            transform: translateX(0) translateY(-50%);
+            opacity: 1;
+        }
+
+        .carousel .arrow-next {
+            right: 10px;
+            transform: translateX(-100%);
+
+        }
+
+        .carousel:hover .arrow-next {
+
+            transform: translateX(0) translateY(-50%);
+            opacity: 1;
+        }
+
+        .carousel .arrow::before {
+            content: "";
+            display: block;
+            width: 6px;
+            height: 6px;
+            border-left: 1px solid #fff;
+            border-top: 1px solid #fff;
+            transform: rotate(-45deg);
+
+        }
+
+        .carousel .arrow-next::before {
+
+            transform: rotate(135deg);
+
+        }
+
+        .carousel .indicators {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .carousel .indicators>li {
+            display: inline-block;
+            padding: 5px 0;
+            cursor: pointer;
+        }
+
+        .carousel .indicators >li::before {
+            content: "";
+            display: block;
+            width: 30px;
+            height: 2px;
+            border-radius: 2px;
+            background: #c0cdcc;
+        }
+
+        .carousel .indicators>li.active::before {
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Carousel</h2>
+        <div class="carousel">
+            <div class="panels">
+                <a href="#1">1</a>
+                <a href="#2">2</a>
+                <a href="#3">3</a>
+                <a href="#4">4</a>
+            </div>
+            <div class="arrows">
+                <button class="arrow arrow-pre"></button>
+                <button class="arrow arrow-next"></button>
+            </div>
+            <ul class="indicators">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+    </script>
+
+
+</body>
+
+</html>
